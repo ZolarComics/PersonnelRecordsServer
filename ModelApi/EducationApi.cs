@@ -8,7 +8,6 @@ namespace ModelApi
 {
     public class EducationApi : ApiBaseType
     {
-        public int Id { get; set; }
         public string EducationalPlace { get; set; }
         public string Speciality { get; set; }
         public DateTime? ReceiptDate { get; set; }

@@ -8,9 +8,8 @@ namespace ModelApi
 {
     public class ExperienceApi : ApiBaseType
     {
-        public int? CompanyId { get; set; }
-        public int? StaffingId { get; set; }
-        public DateTime? DepartureDate { get; set; }
         public int? WorkerId { get; set; }
+        public string PositionName { get; set; }
+        public int? WorkPeriod { get; set; }
     }
 }

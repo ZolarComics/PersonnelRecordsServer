@@ -9,6 +9,7 @@ namespace PersonnelRecordsServer.db
     {
         public Worker()
         {
+            Archives = new HashSet<Archive>();
             Experiences = new HashSet<Experience>();
             Staffings = new HashSet<Staffing>();
         }
@@ -24,6 +25,7 @@ namespace PersonnelRecordsServer.db
 
         public virtual Education Education { get; set; }
         public virtual Passport Passport { get; set; }
+        public virtual ICollection<Archive> Archives { get; set; }
         public virtual ICollection<Experience> Experiences { get; set; }
         public virtual ICollection<Staffing> Staffings { get; set; }
     }

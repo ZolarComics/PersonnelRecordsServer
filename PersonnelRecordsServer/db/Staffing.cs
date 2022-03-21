@@ -10,7 +10,6 @@ namespace PersonnelRecordsServer.db
         public Staffing()
         {
             Archives = new HashSet<Archive>();
-            Experiences = new HashSet<Experience>();
         }
 
         public int Id { get; set; }
@@ -18,11 +17,10 @@ namespace PersonnelRecordsServer.db
         public decimal? Salary { get; set; }
         public int? WorkerId { get; set; }
         public string Note { get; set; }
-        public DateTime? EnrollmentDate { get; set; }
         public int? CompanyId { get; set; }
 
+        public virtual Company Company { get; set; }
         public virtual Worker Worker { get; set; }
         public virtual ICollection<Archive> Archives { get; set; }
-        public virtual ICollection<Experience> Experiences { get; set; }
     }
 }

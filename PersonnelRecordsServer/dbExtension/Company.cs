@@ -25,5 +25,6 @@ namespace PersonnelRecordsServer.db
                 Phone = company.Phone,
             };
         }
+
     }
 }

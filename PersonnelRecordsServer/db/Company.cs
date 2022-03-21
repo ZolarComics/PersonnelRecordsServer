@@ -9,7 +9,7 @@ namespace PersonnelRecordsServer.db
     {
         public Company()
         {
-            Experiences = new HashSet<Experience>();
+            Staffings = new HashSet<Staffing>();
         }
 
         public int Id { get; set; }
@@ -19,6 +19,6 @@ namespace PersonnelRecordsServer.db
         public string Phone { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Experience> Experiences { get; set; }
+        public virtual ICollection<Staffing> Staffings { get; set; }
     }
 }

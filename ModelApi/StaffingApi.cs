@@ -12,7 +12,6 @@ namespace ModelApi
         public decimal? Salary { get; set; }
         public int? WorkerId { get; set; }
         public string Note { get; set; }
-        public DateTime? EnrollmentDate { get; set; }
         public int? CompanyId { get; set; }
     }
 }

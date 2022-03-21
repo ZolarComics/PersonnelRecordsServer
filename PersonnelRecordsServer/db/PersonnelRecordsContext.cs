@@ -31,7 +31,7 @@ namespace PersonnelRecordsServer.db
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Integrated Security= True; Server=LAPTOP-VJ8HF1QJ\\SQLEXPRESS; Initial Catalog=PersonnelRecords;");
+                optionsBuilder.UseSqlServer("Integrated Security=True; Server=LAPTOP-VJ8HF1QJ\\SQLEXPRESS; Initial Catalog=PersonnelRecords;");
             }
         }
 
@@ -45,19 +45,48 @@ namespace PersonnelRecordsServer.db
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.DateEnd)
+                    .HasColumnType("date")
+                    .HasColumnName("dateEnd");
+
+                entity.Property(e => e.DateStart)
+                    .HasColumnType("date")
+                    .HasColumnName("dateStart");
+
+                entity.Property(e => e.ImpactTypeId).HasColumnName("impactTypeID");
+
+                entity.Property(e => e.MakedDate)
+                    .HasColumnType("date")
+                    .HasColumnName("makedDate");
+
+                entity.Property(e => e.NewStatus)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("newStatus");
+
+                entity.Property(e => e.OldStatus)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("oldStatus");
+
                 entity.Property(e => e.StaffingId).HasColumnName("staffingID");
 
-                entity.Property(e => e.TypeOfImpactId).HasColumnName("typeOfImpactID");
+                entity.Property(e => e.WorkerId).HasColumnName("workerID");
+
+                entity.HasOne(d => d.ImpactType)
+                    .WithMany(p => p.Archives)
+                    .HasForeignKey(d => d.ImpactTypeId)
+                    .HasConstraintName("FK_Archive_ImpactTypes");
 
                 entity.HasOne(d => d.Staffing)
                     .WithMany(p => p.Archives)
                     .HasForeignKey(d => d.StaffingId)
                     .HasConstraintName("FK_Archive_Staffing");
 
-                entity.HasOne(d => d.TypeOfImpact)
+                entity.HasOne(d => d.Worker)
                     .WithMany(p => p.Archives)
-                    .HasForeignKey(d => d.TypeOfImpactId)
-                    .HasConstraintName("FK_Archive_ImpactTypes");
+                    .HasForeignKey(d => d.WorkerId)
+                    .HasConstraintName("FK_Archive_Worker");
             });
 
             modelBuilder.Entity<Company>(entity =>
@@ -122,25 +151,14 @@ namespace PersonnelRecordsServer.db
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.CompanyId).HasColumnName("companyID");
+                entity.Property(e => e.PositionName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("positionName");
 
-                entity.Property(e => e.DepartureDate)
-                    .HasColumnType("date")
-                    .HasColumnName("departureDate");
-
-                entity.Property(e => e.StaffingId).HasColumnName("staffingID");
+                entity.Property(e => e.WorkPeriod).HasColumnName("workPeriod");
 
                 entity.Property(e => e.WorkerId).HasColumnName("workerID");
-
-                entity.HasOne(d => d.Company)
-                    .WithMany(p => p.Experiences)
-                    .HasForeignKey(d => d.CompanyId)
-                    .HasConstraintName("FK_experience_Company");
-
-                entity.HasOne(d => d.Staffing)
-                    .WithMany(p => p.Experiences)
-                    .HasForeignKey(d => d.StaffingId)
-                    .HasConstraintName("FK_experience_Staffing");
 
                 entity.HasOne(d => d.Worker)
                     .WithMany(p => p.Experiences)
@@ -203,10 +221,6 @@ namespace PersonnelRecordsServer.db
 
                 entity.Property(e => e.CompanyId).HasColumnName("companyID");
 
-                entity.Property(e => e.EnrollmentDate)
-                    .HasColumnType("date")
-                    .HasColumnName("enrollmentDate");
-
                 entity.Property(e => e.Note)
                     .HasMaxLength(100)
                     .IsUnicode(false)
@@ -223,10 +237,15 @@ namespace PersonnelRecordsServer.db
 
                 entity.Property(e => e.WorkerId).HasColumnName("workerID");
 
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.Staffings)
+                    .HasForeignKey(d => d.CompanyId)
+                    .HasConstraintName("FK_Staffing_Company1");
+
                 entity.HasOne(d => d.Worker)
                     .WithMany(p => p.Staffings)
                     .HasForeignKey(d => d.WorkerId)
-                    .HasConstraintName("FK_Staffing_Worker");
+                    .HasConstraintName("FK_Staffing_Worker1");
             });
 
             modelBuilder.Entity<Worker>(entity =>
@@ -266,12 +285,12 @@ namespace PersonnelRecordsServer.db
                 entity.HasOne(d => d.Education)
                     .WithMany(p => p.Workers)
                     .HasForeignKey(d => d.EducationId)
-                    .HasConstraintName("FK_Worker_Education");
+                    .HasConstraintName("FK_Worker_Education1");
 
                 entity.HasOne(d => d.Passport)
                     .WithMany(p => p.Workers)
                     .HasForeignKey(d => d.PassportId)
-                    .HasConstraintName("FK_Worker_Passport");
+                    .HasConstraintName("FK_Worker_Passport1");
             });
 
             OnModelCreatingPartial(modelBuilder);

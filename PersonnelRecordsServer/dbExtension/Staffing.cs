@@ -17,7 +17,6 @@ namespace PersonnelRecordsServer.db
                 Salary = staffing.Salary,
                 WorkerId = staffing.WorkerId,
                 Note = staffing.Note,
-                EnrollmentDate = staffing.EnrollmentDate,
                 CompanyId = staffing.CompanyId
             };
         }
@@ -31,7 +30,6 @@ namespace PersonnelRecordsServer.db
                 Salary = staffing.Salary,
                 WorkerId = staffing.WorkerId,
                 Note = staffing.Note,
-                EnrollmentDate = staffing.EnrollmentDate,
                 CompanyId = staffing.CompanyId
             };
         }

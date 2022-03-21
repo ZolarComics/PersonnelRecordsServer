@@ -15,10 +15,9 @@ namespace PersonnelRecordsServer.db
             return new ExperienceApi
             {
                 Id = experience.Id,
-                CompanyId = experience.CompanyId,
-                StaffingId = experience.StaffingId,
-                DepartureDate = experience.DepartureDate,
-                WorkerId = experience.WorkerId
+                WorkerId = experience.WorkerId,
+                PositionName = experience.PositionName,
+                WorkPeriod = experience.WorkPeriod,
             };
         }
         public static explicit operator Experience(ExperienceApi experience)
@@ -28,10 +27,9 @@ namespace PersonnelRecordsServer.db
             return new Experience
             {
                 Id = experience.Id,
-                CompanyId = experience.CompanyId,
-                StaffingId = experience.StaffingId,
-                DepartureDate = experience.DepartureDate,
-                WorkerId = experience.WorkerId
+                WorkerId = experience.WorkerId,
+                PositionName = experience.PositionName,
+                WorkPeriod = experience.WorkPeriod,
             };
         }
     }
